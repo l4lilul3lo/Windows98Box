@@ -1,0 +1,179 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard {
+  background: #008080;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.icons {
+  height: 100%;
+}
+
+.icon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  color: white;
+}
+
+.bottom-nav {
+  background: #c0c0c0;
+  display: flex;
+  max-width: 100%;
+  width: 100%;
+  flex-basis: content;
+  height: 100%;
+  padding: 3px;
+}
+
+.window-nav {
+  display: flex;
+  user-select: none;
+  background: rgb(1, 8, 133);
+  background: linear-gradient(
+    90deg,
+    rgba(1, 8, 133, 1) 0%,
+    rgba(15, 124, 203, 1) 100%
+  );
+  padding-top: 2px;
+  padding-right: 2px;
+}
+
+
+
+.window-controls {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.window-size {
+  display: flex;
+}
+
+.control-icon {
+  width: 15px;
+}
+
+.control-icon img {
+  width: 100%;
+}
+
+.close-window {
+  margin-left: 2px;
+}
+
+.start-button {
+  height: 25px;
+}
+
+.start-button img {
+  height: 100%;
+}
+
+.start-menu {
+  display: flex;
+  align-items: center;
+}
+
+.vertical-spacer {
+  height: 100%;
+  margin-left: 3px;
+  display: flex;
+}
+
+.vertical-spacer .line-one,
+.line-two {
+  height: 100%;
+  width: 1px;
+}
+
+.vertical-spacer .line-one {
+  background: gray;
+}
+
+.vertical-spacer .line-two {
+  background: white;
+}
+
+.open-applications {
+  margin-left: 5px;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.application-tab {
+  margin-left: 3px;
+  margin-right: 3px;
+  box-shadow: inset -1px -1px 1px 0.5px black, inset 1px 1px 1px 0.5px white;
+  padding-left: 4px;
+  padding-right: 6px;
+  display: flex;
+  align-items: center;
+  background: #c0c0c0;
+  flex-basis: content;
+  min-width: 0px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.active-tab {
+  box-shadow: inset -1px -1px 1px 0.5px white, inset 1px 1px 1px 0.5px black;
+}
+
+.application-tab .text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left: 3px;
+  white-space: nowrap;
+}
+
+.application-icon {
+  width: 17px;
+  min-width: 17px;
+  overflow: hidden;
+}
+
+.application-icon img {
+  width: 100%;
+}
+
+.title-bar-text {
+  user-select: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.credits {
+  background: white;
+  padding: 4px;
+  text-overflow: ellipsis;
+}
+
+.credits span {
+  text-decoration: underline;
+}
