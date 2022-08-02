@@ -1,0 +1,88 @@
+.task-bar {
+  background: #c0c0c0;
+  display: flex;
+  max-width: 100%;
+  width: 100%;
+  flex-basis: content;
+  height: 100%;
+  padding: 3px;
+  position: "absolute";
+  z-index: 9998;
+}
+
+.start-button {
+  height: 25px;
+}
+
+.start-button img {
+  height: 100%;
+}
+
+.start-menu {
+  display: flex;
+  align-items: center;
+}
+
+.vertical-spacer {
+  height: 100%;
+  margin-left: 3px;
+  display: flex;
+}
+
+.vertical-spacer .line-one,
+.line-two {
+  height: 100%;
+  width: 1px;
+}
+
+.vertical-spacer .line-one {
+  background: gray;
+}
+
+.vertical-spacer .line-two {
+  background: white;
+}
+
+.open-applications {
+  margin-left: 5px;
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.application-tab {
+  margin-left: 3px;
+  margin-right: 3px;
+  box-shadow: inset -1px -1px 1px 0.5px black, inset 1px 1px 1px 0.5px white;
+  padding-left: 4px;
+  padding-right: 6px;
+  display: flex;
+  align-items: center;
+  background: #c0c0c0;
+  flex-basis: content;
+  min-width: 0px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.active-tab {
+  box-shadow: inset -1px -1px 1px 0.5px white, inset 1px 1px 1px 0.5px black;
+}
+
+.application-tab .text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-left: 3px;
+  white-space: nowrap;
+}
+
+.application-icon {
+  width: 17px;
+  min-width: 17px;
+  overflow: hidden;
+}
+
+.application-icon img {
+  width: 100%;
+}

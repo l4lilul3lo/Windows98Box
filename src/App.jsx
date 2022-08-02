@@ -2,9 +2,10 @@ import React, { useState, useRef } from "react";
 import { nanoid } from "nanoid";
 import windowIcon from "./images/window_icon.png";
 import notepadIcon from "./images/notepad_icon.png";
-import startImage from "./images/start_image.png";
 import ResizeDrag from "./components/ResizeDrag";
-
+import TaskBar from "./components/taskbar/TaskBar";
+import githubIcon from './images/github_icon.png'
+import wwwChatIcon from './images/www-chat_icon.png';
 import "./App.css";
 
 function getRandomArbitrary(min, max) {
@@ -50,20 +51,20 @@ function App() {
       icon,
       width,
       height,
-      x: getRandomArbitrary(0, dashboardRef.current.clientWidth - 320),
-      y: getRandomArbitrary(0, dashboardRef.current.clientHeight - 200),
+      x: getRandomArbitrary(0, dashboardRef.current.clientWidth - width),
+      y: getRandomArbitrary(0, dashboardRef.current.clientHeight - height),
       isMinimized: false,
     };
     setApps((prev) => ({ ...prev, [id]: app }));
   }
 
-  function handleClick(event) {
+  function openWwwChat(event) {
     switch (event.detail) {
       case 1: {
         break;
       }
       default: {
-        open("window.exe", 320, 200, windowIcon);
+        open("www-chat", 500, 400, wwwChatIcon);
         break;
       }
     }
@@ -86,14 +87,17 @@ function App() {
       <div className="dashboard" ref={dashboardRef}>
         <div className="icons">
           <div className="icon">
-            <img src={windowIcon} onClick={handleClick} />
-            <span>window.exe</span>
+            <img src={wwwChatIcon} onClick={openWwwChat} />
+            <span>www-chat</span>
           </div>
           <div className="icon">
             <img src={notepadIcon} onClick={openNotePad} />
             <span>credits.txt</span>
           </div>
-          <div className="window" style={{width: "100px", height: "100px"}}></div>
+          <div className="github icon">
+            <a href="https://github.com/l4lilul3lo" target="_blank"><img src={githubIcon} onClick={openNotePad} /></a>
+            <span>github</span>
+          </div>
         </div>
 
         {Object.values(apps).map((app, i) => (
@@ -108,46 +112,11 @@ function App() {
         ))}
       </div>
 
-      <div className="bottom-nav">
-        <div className="start-menu">
-          <div className="start-button">
-            <img src={startImage} />
-          </div>
-          <div className="vertical-spacer">
-            <div className="line-one"></div>
-            <div className="line-two"></div>
-          </div>
-        </div>
-        <div className="open-applications">
-          {Object.values(apps).map((app) => {
-            return (
-              <div
-                className={`application-tab ${
-                  app.isActive ? "active-tab" : ""
-                }`}
-                id={app.id}
-                key={app.id}
-                onClick={() => {
-                  if (app.isActive) {
-                    toggleMinimize(app.id);
-                  } else if (app.isMinimized) {
-                    toggleMinimize(app.id);
-                    setActive(app.id);
-                  } else {
-                    setActive(app.id);
-                  }
-                }}
-              >
-                <div className="application-icon">
-                  <img src={app.icon} />
-                </div>
-
-                <div className="text">{app.name}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <TaskBar
+        apps={apps}
+        toggleMinimize={toggleMinimize}
+        setActive={setActive}
+      />
     </main>
   );
 }

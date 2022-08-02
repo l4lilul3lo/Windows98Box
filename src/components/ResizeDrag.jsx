@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Rnd } from "react-rnd";
-import { motion} from "framer-motion";
+import { motion } from "framer-motion";
 import Fade from "./Fade";
+import Window from "./Window";
 
 function formatWidth(width) {
   if (typeof width === "number") {
@@ -10,7 +11,7 @@ function formatWidth(width) {
   return width;
 }
 
-const TitleBar = ({app}) => {
+const TitleBar = ({ app }) => {
   return (
     <div className="title-bar" style={{ width: "100%" }}>
       <div className="title-bar-text" style={{ width: "100%" }}>
@@ -24,7 +25,7 @@ const MaxAnimation = ({
   getRndDimensions,
   setMaxAnimation,
   updateRndDimensions,
-  app
+  app,
 }) => {
   const { y: top, x: left, width } = getRndDimensions();
   const formattedWidth = formatWidth(width);
@@ -41,7 +42,7 @@ const MaxAnimation = ({
       transition={{ duration: 0.3 }}
       style={{ position: "absolute", zIndex: 9999 }}
     >
-      <TitleBar app={app}/>
+      <TitleBar app={app} />
     </motion.div>
   );
 };
@@ -50,7 +51,7 @@ const RestoreMaxAnimation = ({
   beforeMax,
   setRestoreMaxAnimation,
   updateRndDimensions,
-  app
+  app,
 }) => {
   const { x, y, width, height } = beforeMax.current;
   const from = { top: 0, left: 0, width: "100%" };
@@ -78,7 +79,7 @@ const MinAnimation = ({
   tabDimensions,
   setRndDisplay,
   setActive,
-  app
+  app,
 }) => {
   const { y: top, x: left, width } = getRndDimensions();
   const formattedWidth = formatWidth(width);
@@ -101,7 +102,7 @@ const MinAnimation = ({
           height: tabDimensions.height,
         });
         setRndDisplay("none");
-        setActive('')
+        setActive("");
         setMinAnimation(false);
       }}
       transition={{ duration: 0.3 }}
@@ -118,7 +119,7 @@ const RestoreMinAnimation = ({
   setRestoreMinAnimation,
   tabDimensions,
   setRndDisplay,
-  app
+  app,
 }) => {
   const { x, y, width, height } = beforeMin.current;
   const from = {
@@ -140,7 +141,7 @@ const RestoreMinAnimation = ({
       transition={{ duration: 0.3 }}
       style={{ position: "absolute", zIndex: 9999 }}
     >
-      <TitleBar app={app}/>
+      <TitleBar app={app} />
     </motion.div>
   );
 };
@@ -235,9 +236,15 @@ const ResizeDrag = ({ app, controls, originalZ, setActive }) => {
         }}
         ref={rndRef}
         tabIndex="0"
-        style={{ zIndex: app.isActive ? 9998 : originalZ, display: rndDisplay }}
+        style={{
+          zIndex: app.isActive ? 9998 : originalZ,
+          display: rndDisplay,
+          position: "absolute",
+          // width: "300px",
+        }}
         minWidth={"100px"}
-        minHeight={"25px"}
+        minHeight={"30px"}
+        bounds="parent"
         onMouseDown={() => {
           setActive(app.id);
         }}
@@ -247,9 +254,8 @@ const ResizeDrag = ({ app, controls, originalZ, setActive }) => {
         onDragStart={() => {
           setActive(app.id);
         }}
-        bounds="parent"
         resizeHandleStyles={resizeHandleStyles}
-        dragHandleClassName="title-bar-text"
+        dragHandleClassName="app-info"
       >
         <Fade
           app={app}

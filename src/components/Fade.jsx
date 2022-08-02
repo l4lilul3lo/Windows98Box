@@ -1,7 +1,7 @@
 import { Transition } from "react-transition-group";
 import Window from "./Window";
 
-const duration = 100;
+const duration = 200;
 
 const defaultStyle = {
   transition: `opacity ${duration}ms ease-in-out`,
@@ -25,7 +25,6 @@ const Fade = ({ app, controls, toggleMaximized, maximized }) => {
           style={{
             ...defaultStyle,
             ...transitionStyles[state],
-            
           }}
         >
           <Window

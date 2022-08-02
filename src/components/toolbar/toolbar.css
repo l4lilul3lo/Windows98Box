@@ -1,0 +1,57 @@
+.tool-bar {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  margin-top: 2px;
+  min-height: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.menus {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5px;
+  height: 100%;
+}
+
+.horizontal-white-line {
+  height: 0.5px;
+  background: white;
+}
+
+.vertical-white-line {
+  height: 100%;
+  width: 0.5px;
+  background: white;
+}
+
+.horizontal-black-line {
+  height: 100%;
+  width: 0.5px;
+  background: black;
+  opacity: 0.5;
+}
+
+.menu-one {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  height: 100%;
+}
+
+.first-letter {
+  text-decoration: underline;
+  text-underline-offset: 0px;
+}
+
+.brick {
+  width: 3px;
+  height: 70%;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px gray, -0.5px -0.5px 0.5px 0.5px white;
+  margin-right: 5px;
+}
+
+.menu-one .dropdowns {
+  
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
