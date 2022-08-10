@@ -1,5 +1,10 @@
 .menu-bar {
-  height: 30px;
+  height: 20px;
   display: flex;
   align-items: center;
+  
+}
+
+.menu-bar-buttons {
+  display: flex;
 }

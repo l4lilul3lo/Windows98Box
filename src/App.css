@@ -55,6 +55,7 @@ main {
   justify-content: center;
   margin: 10px;
   color: white;
+  user-select: none;
 }
 
 .icon img {
@@ -91,4 +92,16 @@ main {
   width: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.standard-shadow {
+   box-shadow: inset -0.5px -0.5px 0.5px 0.5px black, inset 0.5px 0.5px 0.5px 0.5px white;
+}
+
+.active {
+  box-shadow: inset -1px -1px 1px 0.5px white, inset 1px 1px 1px 0.5px black;
+}
+
+.inactive {
+  box-shadow: inset -1px -1px 1px 0.5px black, inset 1px 1px 1px 0.5px white;
 }

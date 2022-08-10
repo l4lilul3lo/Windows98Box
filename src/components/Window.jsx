@@ -1,6 +1,7 @@
 import TitleBar from "./titlebar/TitleBar";
 import ToolBar from "./toolbar/ToolBar";
-import WwwChat from './apps/WwwChat'
+import WwwChat from './apps/WwwChat';
+import NotePad from './apps/NotePad';
 const Window = ({ app, controls, toggleMaximized, maximized }) => {
   return (
     <div className="window-box">
@@ -11,7 +12,8 @@ const Window = ({ app, controls, toggleMaximized, maximized }) => {
         maximized={maximized}
       />
       <div className="window-content">
-        {app.name === "www-chat" && <WwwChat />}
+        { app.name === "www-chat" && <WwwChat app={app}/> }
+        { app.name === "Notepad" && <NotePad app={app} /> }
         {app.name === "credits.txt - Notepad" && (
           <div className="credits">
             <span>inspiration</span>

@@ -1,5 +1,5 @@
 import { Transition } from "react-transition-group";
-import Window from "./Window";
+import Window from "../Window";
 
 const duration = 200;
 

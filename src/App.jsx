@@ -1,7 +1,9 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { nanoid } from "nanoid";
+import {initializeNotes, getNoteNamesArr} from './notes/notesApi.mjs'
 import windowIcon from "./images/window_icon.png";
 import notepadIcon from "./images/notepad_icon.png";
+import notepadFileIcon from './images/notepad_file_icon.png';
 import ResizeDrag from "./components/ResizeDrag";
 import TaskBar from "./components/taskbar/TaskBar";
 import githubIcon from './images/github_icon.png'
@@ -12,10 +14,26 @@ function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function getNotes() {
+  return JSON.parse(localStorage.getItem('notes'));
+}
+
+function createNote(name, content) {
+  const notes = JSON.parse(localStorage.getItem('notes'));
+  notes[name] = content;
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
+function deleteNote(name) {
+  const notes = JSON.parse(localStorage.getItem('notes'));
+  delete notes[name];
+  localStorage.setItem('notes', JSON.stringify(notes));
+}
+
 function App() {
   const [apps, setApps] = useState({});
   const dashboardRef = useRef();
-
+const [rightClicked, setRightClicked] = useState(null);
   const close = (appId) => {
     const newApps = { ...apps };
     delete newApps[appId];
@@ -43,11 +61,12 @@ function App() {
     setApps((prev) => ({ ...prev, [appId]: updatedApp }));
   }
 
-  function open(name, width, height, icon) {
+  function open(name, fileName, width, height, icon) {
     const id = nanoid();
     const app = {
       id,
       name,
+      fileName,
       icon,
       width,
       height,
@@ -58,44 +77,68 @@ function App() {
     setApps((prev) => ({ ...prev, [id]: app }));
   }
 
+  function w(n) {
+    const dashboardWidth = dashboardRef.current.clientWidth;
+    return dashboardWidth <= n ? dashboardWidth : n
+  }
+
+  function h(n) {
+    const dashboardHeight = dashboardRef.current.clientHeight;
+    return dashboardHeight <= n ? dashboardHeight : n
+  }
+
   function openWwwChat(event) {
     switch (event.detail) {
       case 1: {
         break;
       }
       default: {
-        open("www-chat", 500, 400, wwwChatIcon);
+        open("www-chat", false, w(400), h(400), wwwChatIcon);
         break;
       }
     }
   }
 
   function openNotePad(event) {
+    const fileName = event.target.id ? event.target.id : event.target.parentElement.id
     switch (event.detail) {
       case 1: {
         break;
       }
       default: {
-        open("credits.txt - Notepad", 320, 200, notepadIcon);
+        open("Notepad", fileName, w(320), h(200), notepadFileIcon);
         break;
       }
     }
   }
 
+  useEffect(() => {
+    initializeNotes()
+  }, [])
+ 
+
+
   return (
-    <main>
-      <div className="dashboard" ref={dashboardRef}>
+    <main onClick={() => setRightClicked(null)}>
+      <div className="dashboard" ref={dashboardRef} >
         <div className="icons">
           <div className="icon">
             <img src={wwwChatIcon} onClick={openWwwChat} />
             <span>www-chat</span>
           </div>
-          <div className="icon">
-            <img src={notepadIcon} onClick={openNotePad} />
-            <span>credits.txt</span>
+          {getNoteNamesArr().map(noteName => {
+      return <div className="icon" key={noteName} id={noteName} onClick={openNotePad}>
+            <img src={notepadFileIcon}  />
+            <span>{noteName}</span>
+          </div>
+          })}
+          
+          <div className="icon" id="notepad.exe">
+            <img src={notepadIcon} />
+            <span>Notepad</span>
           </div>
           <div className="github icon">
-            <a href="https://github.com/l4lilul3lo" target="_blank"><img src={githubIcon} onClick={openNotePad} /></a>
+            <a href="https://github.com/l4lilul3lo" target="_blank"><img src={githubIcon} /></a>
             <span>github</span>
           </div>
         </div>
@@ -114,8 +157,12 @@ function App() {
 
       <TaskBar
         apps={apps}
+        dashboardRef={dashboardRef}
         toggleMinimize={toggleMinimize}
         setActive={setActive}
+        rightClicked={rightClicked}
+        setRightClicked={setRightClicked}
+        controls={{close}}
       />
     </main>
   );

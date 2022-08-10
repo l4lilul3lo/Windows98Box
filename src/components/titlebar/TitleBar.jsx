@@ -19,7 +19,7 @@ const TitleBar = ({ app, controls, toggleMaximized, maximized }) => {
         <div className="app-icon">
           <img src={app.icon} />
         </div>
-        <span>{app.name}</span>
+        <span>{app.fileName ? `${app.fileName} - ${app.name} ` : `${app.name}`}</span>
       </div>
       <div className="title-bar-controls">
         <button

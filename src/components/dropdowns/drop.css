@@ -1,0 +1,16 @@
+.drop-item:hover {
+  background: #000080;
+  color: white;
+}
+
+.drop-item {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 3px;
+  white-space: nowrap;
+}
+
+.drop-content {
+  background: silver;
+  box-shadow: inset -0.5px -0.5px 1px 0px black, inset 0.5px 0.5px 1px 0px white;
+}

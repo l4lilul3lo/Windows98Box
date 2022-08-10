@@ -6,7 +6,7 @@ const MenuBarButton = ({ value, children }) => {
     <span>
       <span className="first-letter">{first}</span>{rest}
     </span>
-    
+    {children}
   </div>
 }
 
