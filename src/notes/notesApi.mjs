@@ -1,7 +1,8 @@
 import {initialNotes} from './initialNotes.mjs'
 
 function getNotes() {
-  return JSON.parse(localStorage.getItem('notes'));
+  const notes = JSON.parse(localStorage.getItem('notes'));
+  return notes ? notes : {}
 }
 
 function getNoteNamesArr() {

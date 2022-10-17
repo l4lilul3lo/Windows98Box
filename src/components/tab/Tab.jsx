@@ -46,7 +46,7 @@ const Tab = ({ app, toggleMinimize, setActive, dashboardRef, setRightClicked, ri
 
       <div className="text">{app.name}</div>
       
-      <div className={`tab-menu ${rightClicked === app.id ? '' : 'hidden'}`} ref={menuRef} onClick={(e) => e.stopPropagation()}>
+     <div className={`tab-menu ${rightClicked === app.id ? '' : 'hidden'}`} ref={menuRef} onClick={(e) => e.stopPropagation()}>
         <span className="tab-menu-option" onClick={handleClose}><span className="first-letter">C</span>lose</span>
         <span className="tab-menu-option"><span className="first-letter">R</span>ecover</span>
           </div>

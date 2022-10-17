@@ -9,9 +9,12 @@ function formatWidth(width) {
 
 const DummyTitleBar = ({ app }) => {
   return (
-    <div className="title-bar" style={{ width: "100%" }}>
-      <div className="title-bar-text" style={{ width: "100%" }}>
-        {app.name}
+    <div className="title-bar" >
+     <div className="app-info">
+        <div className="app-icon">
+          <img src={app.icon} />
+        </div>
+        <span>{app.fileName ? `${app.fileName} - ${app.name} ` : `${app.name}`}</span>
       </div>
     </div>
   );
@@ -36,7 +39,7 @@ const MaxAnimation = ({
         setMaxAnimation(false);
       }}
       transition={{ duration: 0.3 }}
-      style={{ position: "absolute", zIndex: 9999 }}
+      style={{ position: "absolute", zIndex: 9999, width: formattedWidth, background: 'blue' }}
     >
       <DummyTitleBar app={app} />
     </motion.div>
@@ -122,9 +125,9 @@ const RestoreMinAnimation = ({
     top: tabDimensions.y,
     left: tabDimensions.x,
     width: tabDimensions.width,
-    height: tabDimensions.height,
+    height: 30
   };
-  const to = { top: y, left: x, width };
+  const to = { top: y, left: x, width, height: 30 };
   return (
     <motion.div
       initial={from}

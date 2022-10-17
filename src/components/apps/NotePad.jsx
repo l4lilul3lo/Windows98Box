@@ -1,19 +1,33 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import ToolBar from '../toolbar/ToolBar'
 import MenuBar from '../menubar/MenuBar'
 import MenuBarButton from '../button/MenuBarButton'
+import TitleBar from '../titlebar/TitleBar'
 import { getNote } from '../../notes/notesApi.mjs'
 import Drop from '../dropdowns/Drop'
 import DropItem from '../dropdowns/DropItem'
 const NotePad = ({ app }) => {
-  const [textContent, setTextContent] = useState(getNote(app.fileName))
-  const [displayFileDropdown, setDisplayFileDropdown] = useState(false)
-
-  function toggleFileDropdown() {
-    setDisplayFileDropdown(!displayFileDropdown)
-  }
+  const [textContent, setTextContent] = useState(getNote(app.fileName));
   
-  return <div className="application">
+  const textAreaRef = useRef()
+  
+
+  // if textContent is falsey
+  // list titlebar as Untitled
+
+  // window
+  // titlebar 
+  // toolbar
+  // content
+  return <div className="window-box">
+
+    {/* <TitleBar
+        app={app}
+        controls={controls}
+        toggleMaximized={toggleMaximized}
+        maximized={maximized}
+      /> */}
+  <div className="application">
     <ToolBar>
       <MenuBar>
         <MenuBarButton value={"File"}>
@@ -29,7 +43,11 @@ const NotePad = ({ app }) => {
         <MenuBarButton value={"Edit"}>
           <Drop down>
             <div className="drop-content">
-              <DropItem>Undo</DropItem>
+              <DropItem><div onClick={() => { 
+    console.log('clicked');
+    textAreaRef.current.focus();
+    textAreaRef.current.dispatchEvent(new KeyboardEvent('keydown', {'key': 'z', 'ctrlKey': true}))
+                                            }}>Undo</div></DropItem>
               <DropItem>Redo</DropItem>
             </div>
           </Drop>
@@ -37,18 +55,10 @@ const NotePad = ({ app }) => {
       </MenuBar>
     </ToolBar>
     <div className="window-content">
-      <textarea value={textContent} onChange={(e) => setTextContent(e.target.value)} style={{ height: "100%", width: "100%", resize: "none", fontFamily: 'arial' }}></textarea>
+      <textarea ref={textAreaRef} value={textContent} onChange={(e) => setTextContent(e.target.value)} style={{ height: "100%", width: "100%", resize: "none", fontFamily: 'arial' }}></textarea>
     </div>
   </div>
-  // notepad can pull from local storage based on notepad name.
-  // when you open a new notepad it's blank.
-
-  // here there is the option to start typing or open a file on the users system.
-
-  // There is file open and file save
-  // This means window titlebar is window specific.
-
-  // we need a generic toolbar
+  </div>
 }
 
 export default NotePad

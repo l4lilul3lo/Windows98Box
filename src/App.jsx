@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, createContext } from "react";
 import { nanoid } from "nanoid";
 import {initializeNotes, getNoteNamesArr} from './notes/notesApi.mjs'
 import windowIcon from "./images/window_icon.png";
@@ -34,11 +34,15 @@ function App() {
   const [apps, setApps] = useState({});
   const dashboardRef = useRef();
 const [rightClicked, setRightClicked] = useState(null);
+  
   const close = (appId) => {
     const newApps = { ...apps };
     delete newApps[appId];
     setApps(newApps);
   };
+
+
+  
 
   const setActive = (appId) => {
     const newApps = { ...apps };
@@ -73,6 +77,9 @@ const [rightClicked, setRightClicked] = useState(null);
       x: getRandomArbitrary(0, dashboardRef.current.clientWidth - width),
       y: getRandomArbitrary(0, dashboardRef.current.clientHeight - height),
       isMinimized: false,
+      toggleMinimize,
+      setActive,
+      close
     };
     setApps((prev) => ({ ...prev, [id]: app }));
   }
@@ -112,13 +119,7 @@ const [rightClicked, setRightClicked] = useState(null);
     }
   }
 
-  useEffect(() => {
-    initializeNotes()
-  }, [])
- 
-
-
-  return (
+   return (
     <main onClick={() => setRightClicked(null)}>
       <div className="dashboard" ref={dashboardRef} >
         <div className="icons">
@@ -142,7 +143,6 @@ const [rightClicked, setRightClicked] = useState(null);
             <span>github</span>
           </div>
         </div>
-
         {Object.values(apps).map((app, i) => (
           <ResizeDrag
             app={app}

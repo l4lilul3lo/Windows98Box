@@ -1,7 +1,7 @@
-.title-bar {
+/* .title-bar {
   padding: 0px;
   margin: 0px;
-}
+} */
 
 .app-info {
   display: flex;
@@ -38,15 +38,15 @@
   justify-content: flex-end;
 }
 
-.title-bar-controls button {
+/* .title-bar-controls button {
   height: 18px;
   width: 18px;
-}
+} */
 
-.maximize-btn, .close-btn {
+/* .maximize-btn, .close-btn {
   background-position: 3.75px center !important;
 }
 
 .minimize-btn {
   background-position: 5px 11px !important;
-}
+} */

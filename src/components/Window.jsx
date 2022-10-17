@@ -5,12 +5,12 @@ import NotePad from './apps/NotePad';
 const Window = ({ app, controls, toggleMaximized, maximized }) => {
   return (
     <div className="window-box">
-      <TitleBar
+       <TitleBar
         app={app}
         controls={controls}
         toggleMaximized={toggleMaximized}
         maximized={maximized}
-      />
+      /> 
       <div className="window-content">
         { app.name === "www-chat" && <WwwChat app={app}/> }
         { app.name === "Notepad" && <NotePad app={app} /> }
